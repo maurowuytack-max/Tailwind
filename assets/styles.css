@@ -1,0 +1,284 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
+body{
+   
+    /* Background image for the whole site is moved to body::before with reduced opacity */
+    background-color: rgb(250, 221, 182);
+    position: relative; /* create stacking context for pseudo-elements */
+    color: #161717;
+    height:auto;
+    min-height:100vh;
+}
+/* Container styling */
+.container {
+      color: rgb(0, 0, 0);
+    font-family: 'Roboto';
+    max-width: 65vw;
+    margin-left: auto;
+    margin-right: auto;
+    /* reset position and z-index to default (removed background overlay) */
+}
+
+.title {
+    color: rgb(0, 0, 0);
+    font-family: 'Montserrat';
+    font-size: 1em;
+    font-weight: bold;
+    text-transform: capitalize;
+    margin-top: 2em;
+}
+
+/* Hero header with image */
+
+/* Hero removed — header image and home button were removed per user request */
+
+/* Intro sentence below header */
+.intro-sentence{
+    text-align: center;
+    color: #fff;
+    margin: 0.5rem 0 1rem 0;
+}
+
+/* Main title and descriptive text */
+.site-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 2.6rem;
+    margin: 0.25em 0 0.25em 0;
+    color: #fff;
+}
+.lead {
+    font-size: 1.08rem;
+    color: #000000;
+    margin-bottom: 0.5em;
+}
+.author{
+    font-size: 0.95rem;
+    color: #000000;
+    margin-bottom: 1.5em;
+}
+
+/* Week buttons row */
+.week-list{
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-top: 1.25em;
+}
+.week-button{
+    display:inline-block;
+    background-color: #ffd54f;
+    color: #07112a;
+    border: none;
+    padding: 10px 22px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    text-decoration: none; /* anchors appear like buttons */
+}
+.week-button:hover{
+    background-color: #ffffff;
+}
+
+/* focus and hover states */
+.week-button:focus{ outline: 3px solid rgba(255,255,255,0.25); }
+
+/* Back link style for week pages */
+.back-link{
+    display:inline-block;
+    margin-bottom: 1em;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 600;
+}
+.back-link:hover{ text-decoration: underline; }
+
+/* Perforation span inside ticket buttons - visual dashed vertical line */
+/* removed ticket perforation - week buttons reverted to simpler style */
+
+/* Background image overlay removed per user request */
+
+/* Page-specific paper texture background for Week 1 (class .paper on body) */
+body.paper {
+    /* Paper pages should show the paper texture background as the site requested. */
+    /* Keep defaults for color to ensure dark text on the paper texture */
+    color: #111;
+}
+
+/* Optional semi-transparent overlay for body background readability */
+body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(255,255,255,0.15); /* lighten/dim below content if needed */
+    pointer-events: none;
+    z-index: 1; /* sit above background (body::before) */
+}
+
+/* Background image pseudo-element with 30% opacity */
+body::before{
+    content: "";
+    position: fixed;
+    inset: 0;
+    /* Replace the photo image with a vivid fluo blue -> blue gradient */
+    background: linear-gradient(135deg, #00E6FF 0%, #0047FF 100%);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 1;
+    z-index: 0; /* behind overlay and content */
+    pointer-events: none;
+}
+
+/* Disable site-level background image on paper pages */
+/* Keep the gradient for the whole site in body::before, but for paper pages add a paper texture above it */
+body.paper::before{ 
+    /* Paper pages: use the provided paper texture image, with a fallback gradient so
+       the page doesn't go blank when the image file is missing. */
+    content: "";
+    position: fixed;
+    inset: 0;
+    /* Primary background: paper image; secondary fallback gradient */
+    background-image: url('assets/pap.png'), linear-gradient(180deg, #fbf7f2 0%, #f3efe7 100%);
+    background-repeat: repeat, no-repeat;
+    /* Let the image tile naturally while keeping the gradient as a subtle base */
+    background-size: auto, cover;
+    background-position: center, center;
+    background-attachment: fixed;
+    opacity: 1; /* make texture visible */
+    z-index: 0; /* behind overlay and content */
+    pointer-events: none;
+}
+
+/* Week 1-specific background removed (undo) */
+
+/* Ensure content sits above overlay */
+.container{ position: relative; z-index: 2; }
+
+/* Adjust title and links colors for paper pages */
+body.paper .site-title, body.paper .lead, body.paper .author {
+    color: #222; /* dark text suits the paper texture */
+}
+body.paper .back-link{ color: #222; }
+body.paper .week-button{ background-color:#e6c66a; color:#07112a; }
+
+/* Site header with Home button and close/open toggle */
+.site-header{
+    width: 100%;
+    background: rgba(0,0,0,0.95); /* black header */
+    border: 1px solid rgba(255,255,255,0.06);
+    padding: 8px 12px;
+    border-radius: 10px;
+    display:flex;
+    align-items:center;
+    justify-content: space-between;
+    gap: 12px;
+    transition: all 0.28s ease;
+    margin: 0 0 1rem 0;
+    color: #fff; /* make header text white */
+    box-sizing: border-box;
+    position: sticky; /* lock header on scroll */
+    top: 8px;
+    z-index: 800; /* above other content */
+}
+.site-header .header-left{ display:flex; align-items:center; gap:8px; }
+.site-header .header-right{ display:flex; align-items:center; gap:8px; }
+.site-header .home-link{ text-decoration:none; color: inherit; font-weight:700; padding:6px 10px; border-radius:6px; background: rgba(255,255,255,0.06);} 
+.site-logo{ display:flex; flex-direction:column; align-items:center; gap:6px; margin-left:8px; }
+.site-logo .logo-svg{ width:48px; height:auto; max-height:44px; fill:#ffffff; opacity:0.95; display:block; }
+.logo-line-svg{ display:block; width:140px; height:6px; }
+.logo-underline{ stroke:#ffffff; stroke-width:3; stroke-linecap:round; stroke-dasharray: 140; stroke-dashoffset: 140; animation: drawLine 1s ease forwards 0.2s; }
+
+@keyframes drawLine{
+    to { stroke-dashoffset: 0; }
+}
+
+/* Subtle hover highlight for the logo */
+.site-logo:hover .logo-underline{ stroke:#00b4ff; }
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+    .logo-underline { animation: none; stroke-dashoffset: 0; }
+}
+.site-header .header-toggle{ background: none; border: none; cursor:pointer; color: inherit; font-size: 1.15rem; transform: rotate(0deg); transition: transform 0.2s ease; }
+/* Remove the collapse toggle UI since header is locked open */
+.site-header .header-toggle{ display: none; }
+
+.site-header.collapsed{ padding: 6px 12px; }
+/* Ensure header remains visible even if the collapsed class is present */
+.site-header.collapsed .header-left,
+.site-header.collapsed .header-right { opacity: 1 !important; visibility: visible !important; transform: none !important; pointer-events: auto !important; }
+.site-header.collapsed .header-toggle{ transform: rotate(0deg) !important; }
+
+/* Keep header visible on paper pages, styling matches paper theme */
+body.paper .site-header{ background: rgba(0,0,0,0.95); border: 1px solid rgba(255,255,255,0.06); color:#fff; }
+
+/* Header weeks dropdown */
+.header-weeks{ position: relative; display: inline-block; margin-left: 12px; }
+.weeks-trigger{ background: transparent; border: none; color: inherit; font-weight:700; padding: 6px 10px; cursor: pointer; }
+.header-week-menu{ position: absolute; top: calc(100% + 8px); right: 0; display: flex; flex-direction: column; gap: 8px; background: rgba(255,255,255,0.04); padding: 10px; border-radius: 8px; z-index: 999; min-width: 180px; box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    /* Hidden by default, will be shown on hover or when aria-expanded is set */
+    opacity: 0; visibility: hidden; transform: translateY(-6px); pointer-events: none; transition: opacity 160ms ease, transform 160ms ease, visibility 160ms ease;
+}
+.header-weeks:hover .header-week-menu, .header-weeks:focus-within .header-week-menu{ opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+.header-week-menu .week-button{ display: block; width: 100%; padding: 8px 12px; background: transparent; border: 1px solid rgba(255,255,255,0.06); border-radius: 6px; color: #fff; }
+.header-week-menu .week-button:hover{ background: rgba(255,255,255,0.06); color: #fff; }
+/* Make sure the menu items are keyboard-focus visible */
+.header-week-menu .week-button:focus{ outline: 3px solid rgba(255,255,255,0.18); }
+/* Allow menu to open when aria-expanded is true (accessibility / click toggle) */
+.weeks-trigger[aria-expanded="true"] + .header-week-menu{ opacity: 1; visibility: visible; transform: translateY(0); pointer-events: auto; }
+
+
+/* Glass panel (square) for content background */
+.glass-square{
+    width: min(70vw, 650px);
+    aspect-ratio: 1/1; /* keep it square on supporting browsers */
+    margin: 2rem auto;
+    border-radius: 18px;
+    padding: 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.12);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+/* Inner content styles on glass panels */
+.glass-square .site-title{ color: #ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.5); }
+.glass-square .lead, .glass-square .author { color:#ffffff; text-shadow: 0 1px 2px rgba(0,0,0,0.4); }
+.glass-square { text-align:center; }
+.glass-square .site-title, .glass-square .lead, .glass-square .author{ text-align:center; }
+/* Hide any week-list that could be placed inside a glass-square, since those belong in the header dropdown */
+.glass-square .week-list{ display: none !important; }
+
+/* Background logo (watermark) */
+.background-logo{ position:fixed; inset:0; display:flex; align-items:center; justify-content:center; pointer-events:none; z-index:0; }
+.background-logo .bg-logo-svg{ width:min(64vw, 1200px); max-width: 1600px; opacity: 0.06; fill: #ffffff; display:block; }
+@media (max-width: 700px){
+    .background-logo .bg-logo-svg{ width: 80vw; opacity: 0.03; }
+}
+.glass-square .vertical-buttons li a { color:#ffffff; }
+
+/* Glassy buttons */
+.glass-button, .week-button.glass, .glass-square .week-button{
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #07112a;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* responsive fallback for non-supporting browsers - remove aspect-ratio on small screens */
+@media (max-width: 700px){
+    .glass-square{ width: 90vw; aspect-ratio: auto; padding: 1rem; }
+}
+
+
